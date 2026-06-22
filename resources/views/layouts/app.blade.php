@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ayam Kampus - App</title>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <style>
+        :root {
+            --primary: #E53935;
+            --secondary: #FF5FA2;
+            --background: #FFFFFF;
+            --text-dark: #333333;
+            --text-light: #F5F5F5;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--background);
+            color: var(--text-dark);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        /* Navbar */
+        .navbar {
+            background-color: var(--primary);
+            color: var(--text-light);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 12px rgba(229, 57, 53, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .navbar .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            text-decoration: none;
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .navbar .nav-links { display: flex; gap: 1.5rem; align-items: center; }
+        .navbar .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        .navbar .nav-links a:hover { color: var(--secondary); }
+
+        /* Main Content */
+        .content {
+            flex: 1;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--text-dark);
+            color: var(--text-light);
+            text-align: center;
+            padding: 2rem;
+            margin-top: auto;
+        }
+        .footer p { margin-bottom: 0.5rem; }
+        .footer .highlight { color: var(--secondary); font-weight: bold; }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="/" class="logo">
+            🍗 Ayam Kampus
+        </a>
+        <div class="nav-links">
+            <a href="{{ url('/dashboard') }}">Beranda</a>
+            <a href="#">Menu</a>
+            <a href="#">Pesanan Saya</a>
+            <a href="{{ route('profile.edit') }}">Profil</a>
+            <form method="POST" action="{{ route('logout') }}" style="display:inline;">
+                @csrf
+                <a href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();" style="font-weight: bold; color: var(--secondary);">Logout</a>
+            </form>
+        </div>
+    </nav>
+
+    @isset($header)
+        <header class="bg-white shadow" style="padding: 1rem 2rem; margin-bottom: 1rem; border-bottom: 2px solid #eee;">
+            {{ $header }}
+        </header>
+    @endisset
+
+    <main class="content">
+        {!! $slot ?? '' !!}
+        @yield('content')
+    </main>
+
+    <footer class="footer">
+        <p>&copy; {{ date('Y') }} Ayam Kampus. Hak Cipta Dilindungi.</p>
+        <p>Marketplace Kuliner Mahasiswa <span class="highlight">Terbaik</span></p>
+    </footer>
+</body>
+</html>
