@@ -242,8 +242,10 @@
             </div>
             <div class="loader" id="loader">Memuat produk lainnya... 🍗</div>
         @else
-            <div style="text-align: center; padding: 3rem; color: #888;">
-                <h3>Maaf, produk tidak ditemukan.</h3>
+            <div style="text-align: center; padding: 4rem 2rem; background: white; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.02);">
+                <span style="font-size: 4rem; display: block; margin-bottom: 1rem;">🍽️</span>
+                <h3 style="color: #555; margin-bottom: 0.5rem;">Maaf, menu belum tersedia.</h3>
+                <p style="color: #888;">Coba cari dengan kata kunci lain atau cek lagi nanti!</p>
             </div>
         @endif
     </div>
